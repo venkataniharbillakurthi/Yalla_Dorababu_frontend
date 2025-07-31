@@ -88,7 +88,7 @@ function App() {
 
   // Use location to conditionally render Header
   const location = window.location.pathname;
-  const isAdminRoute = location.startsWith('/admin') || location === '/admin/login';
+  const isAdminRoute = location.startsWith('/dashboard') || location === '/admin/login';
 
   return (
     <AuthProvider>
@@ -107,13 +107,11 @@ function App() {
               <Routes>
                 <Route path="/" element={<MainContent currentLanguage={currentLanguage} />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
-                <Route path="/admin/*" element={
+                <Route path="/dashboard/*" element={
                    <ProtectedRoute>
                      <DashboardLayout />
                    </ProtectedRoute>
                  }>
-                   <Route index element={<Navigate to="dashboard" replace />} />
-                   <Route path="dashboard" element={<div>Admin Dashboard</div>} />
                    <Route path="journey" element={<JourneyManager />} />
                    <Route path="speeches" element={<SpeechesManager />} />
                    <Route path="press-release" element={<PressReleaseManager />} />
