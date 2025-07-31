@@ -10,7 +10,16 @@ const DashboardLayout = () => {
         <h2 className="font-extrabold text-2xl tracking-wide p-6 border-b border-orange-400 bg-orange-600">Admin Panel</h2>
         <nav className="flex flex-col gap-1 p-4 text-base flex-1">
           <NavLink
-            to="/dashboard/journey"
+            to="/admin/dashboard"
+            className={({ isActive }) =>
+              `px-4 py-2 rounded-lg transition-all font-medium ${isActive ? 'bg-white text-orange-600 shadow' : 'hover:bg-orange-400 hover:text-white'}`
+            }
+            end
+          >
+            Dashboard
+          </NavLink>
+          <NavLink
+            to="/admin/journey"
             className={({ isActive }) =>
               `px-4 py-2 rounded-lg transition-all font-medium ${isActive ? 'bg-white text-orange-600 shadow' : 'hover:bg-orange-400 hover:text-white'}`
             }
@@ -19,7 +28,7 @@ const DashboardLayout = () => {
             Life Journey
           </NavLink>
           <NavLink
-            to="/dashboard/speeches"
+            to="/admin/speeches"
             className={({ isActive }) =>
               `px-4 py-2 rounded-lg transition-all font-medium ${isActive ? 'bg-white text-orange-600 shadow' : 'hover:bg-orange-400 hover:text-white'}`
             }
@@ -28,7 +37,7 @@ const DashboardLayout = () => {
             Speeches
           </NavLink>
           <NavLink
-            to="/dashboard/press-release"
+            to="/admin/press-release"
             className={({ isActive }) =>
               `px-4 py-2 rounded-lg transition-all font-medium ${isActive ? 'bg-white text-orange-600 shadow' : 'hover:bg-orange-400 hover:text-white'}`
             }
@@ -37,7 +46,7 @@ const DashboardLayout = () => {
             Press Release
           </NavLink>
           <NavLink
-            to="/dashboard/gallery"
+            to="/admin/gallery"
             className={({ isActive }) =>
               `px-4 py-2 rounded-lg transition-all font-medium ${isActive ? 'bg-white text-orange-600 shadow' : 'hover:bg-orange-400 hover:text-white'}`
             }
@@ -46,7 +55,7 @@ const DashboardLayout = () => {
             Gallery
           </NavLink>
           <NavLink
-            to="/dashboard/messages"
+            to="/admin/messages"
             className={({ isActive }) =>
               `px-4 py-2 rounded-lg transition-all font-medium ${isActive ? 'bg-white text-orange-600 shadow' : 'hover:bg-orange-400 hover:text-white'}`
             }
