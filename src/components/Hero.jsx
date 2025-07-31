@@ -5,8 +5,9 @@ import { motion } from 'framer-motion';
 // Get Cloudinary cloud name from environment variables
 const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dhzhuobu2';
 
+
 const carouselImages = [
-  { src: `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/v1753677382/pic_vth_someone_unsqn2.jpg`, alt: 'With Someone' },
+  { src: `https://res.cloudinary.com/dhzhuobu2/image/upload/v1753677382/pic_vth_someone_unsqn2.jpg`, alt: 'With Someone' },
   { src: `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/v1753677381/PIC_VTH_MODI_dgwo9n.jpg`, alt: 'With Modi' },
   { src: `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/v1753677381/pic_Vth_modi_1_libkxc.png`, alt: 'With Modi - Event 1' },
   { src: `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/v1753677380/pic_vth_amit_bauivg.jpg`, alt: 'With Amit Shah' },
@@ -76,28 +77,28 @@ const Hero = ({ currentLanguage }) => {
 
   return (
     <section id="home" className="w-full bg-[#fdf6ec] mt-8 md:mt-0 pt-20 pb-2 md:pt-24 md:pb-4 scroll-mt-20 md:scroll-mt-28">
-      <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
-        <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-4 md:gap-16 bg-white/60 backdrop-blur-md rounded-2xl md:rounded-3xl shadow-xl p-2 sm:p-4 md:p-8 mb-4 md:mb-8 relative overflow-hidden">
+      <div className="container px-2 mx-auto sm:px-4 md:px-6 lg:px-8">
+        <div className="relative flex flex-col-reverse items-center justify-between gap-4 p-2 mb-4 overflow-hidden shadow-xl lg:flex-row md:gap-16 bg-white/60 backdrop-blur-md rounded-2xl md:rounded-3xl sm:p-4 md:p-8 md:mb-8">
           {/* Background Image for Main Content Div */}
           <div className="absolute inset-0 z-0">
             <img
               src={`https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/v1753677383/pic_Vth_Modi_2_zpiwe8.png`}
               alt="Political Event Background"
-              className="w-full h-full object-cover object-center opacity-60 md:opacity-100"
+              className="object-cover object-center w-full h-full opacity-60 md:opacity-100"
             />
             {/* Black overlay for readability */}
             <div className="absolute inset-0 bg-black/50"></div>
           </div>
           {/* Left: Text Content */}
           <motion.div
-            className="flex-1 w-full max-w-full sm:max-w-xl text-center lg:text-left relative z-10 lg:mt-40 rounded-xl p-4"
+            className="relative z-10 flex-1 w-full max-w-full p-4 text-center sm:max-w-xl lg:text-left lg:mt-40 rounded-xl"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
             variants={fadeIn}
           >
             <motion.h1
-              className="text-2xl sm:text-3xl md:text-5xl font-extrabold font-serif mb-1 sm:mb-2 leading-tight text-white"
+              className="mb-1 font-serif text-2xl font-extrabold leading-tight text-white sm:text-3xl md:text-5xl sm:mb-2"
               style={{
                 textShadow: '0 4px 16px #F47216, 0 2px 8px rgba(0,0,0,0.25)'
               }}
@@ -108,14 +109,14 @@ const Hero = ({ currentLanguage }) => {
             </motion.h1>
             {/* Removed underline divider */}
             <motion.div
-              className="inline-block bg-orange-100 text-orange-700 px-3 py-1 rounded-full font-semibold text-base shadow-sm mb-2"
+              className="inline-block px-3 py-1 mb-2 text-base font-semibold text-orange-700 bg-orange-100 rounded-full shadow-sm"
               custom={2}
               variants={fadeIn}
             >
               {currentLanguage === 'hi' ? 'डोराबाबू' : 'Dorababu'}
             </motion.div>
             <motion.div
-              className="text-lg sm:text-xl font-bold text-orange-600 drop-shadow mb-2"
+              className="mb-2 text-lg font-bold text-orange-600 sm:text-xl drop-shadow"
               style={{
                 textShadow: '0 1px 4px rgba(0,0,0,0.10)',
                 WebkitTextStroke: '0.5px #fff',
@@ -129,7 +130,7 @@ const Hero = ({ currentLanguage }) => {
               </span>
             </motion.div>
             <motion.p
-              className="text-sm sm:text-base md:text-lg mb-2 sm:mb-4 text-white/90"
+              className="mb-2 text-sm sm:text-base md:text-lg sm:mb-4 text-white/90"
               style={{ textShadow: '0 2px 8px rgba(0,0,0,0.7)' }}
               custom={4}
               variants={fadeIn}
@@ -141,7 +142,7 @@ const Hero = ({ currentLanguage }) => {
               variants={fadeIn}
             >
               <button 
-                className="px-6 py-2 sm:px-8 sm:py-3 rounded-lg bg-gradient-to-r from-orange-500 to-yellow-400 text-white font-semibold text-base sm:text-lg shadow hover:from-orange-600 hover:to-yellow-500 transition"
+                className="px-6 py-2 text-base font-semibold text-white transition rounded-lg shadow sm:px-8 sm:py-3 bg-gradient-to-r from-orange-500 to-yellow-400 sm:text-lg hover:from-orange-600 hover:to-yellow-500"
                 onClick={() => {
                   const aboutSection = document.querySelector('#about');
                   if (aboutSection) {
@@ -155,7 +156,7 @@ const Hero = ({ currentLanguage }) => {
           </motion.div>
           {/* Right: Image */}
           <motion.div
-            className="flex-1 flex justify-center lg:justify-end w-full relative z-10 mt-4 sm:mt-8 lg:mt-0 lg:-ml-12"
+            className="relative z-10 flex justify-center flex-1 w-full mt-4 lg:justify-end sm:mt-8 lg:mt-0 lg:-ml-12"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -173,11 +174,11 @@ const Hero = ({ currentLanguage }) => {
       </div>
       {/* Carousel Section */}
       <div className="mt-2 sm:mt-4">
-        <h2 className="text-lg sm:text-2xl md:text-3xl font-bold text-center mb-4 sm:mb-8 text-orange-700 tracking-tight font-serif">
+        <h2 className="mb-4 font-serif text-lg font-bold tracking-tight text-center text-orange-700 sm:text-2xl md:text-3xl sm:mb-8">
           {currentLanguage === 'hi' ? 'सामाजिक सेवा, राजनीति और विकास के लिए एक बीजीपी लीडर।' : 'Moments in Public Life'}
         </h2>
         <div 
-          className="overflow-x-auto w-full cursor-grab active:cursor-grabbing scrollbar-hide"
+          className="w-full overflow-x-auto cursor-grab active:cursor-grabbing scrollbar-hide"
           ref={carouselRef}
           onMouseDown={handleMouseDown}
           onMouseLeave={handleMouseLeave}
