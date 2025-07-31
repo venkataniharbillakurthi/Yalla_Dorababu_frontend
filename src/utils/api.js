@@ -1,7 +1,7 @@
 // API utility for backend communication
 // Uses fetch; can be swapped for axios if preferred
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://ed8d622d6348.ngrok-free.app';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://fe3fe2d1b8b1.ngrok-free.app';
 
 // Submit a new contact message
 export async function submitContactMessage({ name, email, message }) {

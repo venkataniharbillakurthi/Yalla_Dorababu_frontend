@@ -1,6 +1,6 @@
 // src/utils/secureApi.js
 
-const API_BASE_URL = 'https://ed8d622d6348.ngrok-free.app/api';
+const API_BASE_URL = 'https://fe3fe2d1b8b1.ngrok-free.app/api';
 
 const secureApi = {
   async request(endpoint, options = {}) {
