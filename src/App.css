@@ -1,0 +1,72 @@
+/* Glare Hover Effect for Navbar Links */
+.glare-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.glare-hover::before {
+  z-index: 2;
+  filter: blur(1px);
+  opacity: 0.9;
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.0) 100%);
+  transform: skewX(-25deg);
+  transition: left 0.5s cubic-bezier(.25,.8,.25,1);
+  pointer-events: none;
+}
+
+.glare-hover:hover::before {
+  opacity: 1;
+  filter: blur(0.5px);
+  left: 120%;
+  transition: left 0.5s cubic-bezier(.25,.8,.25,1);
+}
+
+/* Fade-in and pop animations for wow effect */
+.animate-fade-in {
+  animation: fadeIn 1.2s ease-in-out;
+}
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-pop {
+  animation: pop 0.3s cubic-bezier(.59,1.36,.59,1.36);
+}
+@keyframes pop {
+  0% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+/* Orange button and card hover effects */
+.btn-orange {
+  background: linear-gradient(90deg, #ff6a00 0%, #ff8c42 100%);
+  color: #fff;
+  border-radius: 9999px;
+  box-shadow: 0 4px 24px rgba(255,106,0,0.16);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.btn-orange:hover, .btn-orange:focus {
+  background: linear-gradient(90deg, #ff8c42 0%, #ff6a00 100%);
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 8px 32px 0 rgba(255,106,0,0.22);
+}
+
+.card-wow {
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 32px 0 rgba(255,106,0,0.13);
+  transition: box-shadow 0.2s, transform 0.2s;
+  background: #fff6f0;
+}
+.card-wow:hover {
+  box-shadow: 0 8px 32px 0 rgba(255,106,0,0.22);
+  transform: translateY(-4px) scale(1.02);
+}
