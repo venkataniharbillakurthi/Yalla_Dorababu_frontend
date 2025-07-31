@@ -8,13 +8,13 @@ const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dhz
 
 const carouselImages = [
   { src: `https://res.cloudinary.com/dhzhuobu2/image/upload/v1753677382/pic_vth_someone_unsqn2.jpg`, alt: 'With Someone' },
-  { src: `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/v1753677381/PIC_VTH_MODI_dgwo9n.jpg`, alt: 'With Modi' },
-  { src: `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/v1753677381/pic_Vth_modi_1_libkxc.png`, alt: 'With Modi - Event 1' },
-  { src: `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/v1753677380/pic_vth_amit_bauivg.jpg`, alt: 'With Amit Shah' },
-  { src: `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/v1753677383/pic_Vth_Modi_2_zpiwe8.png`, alt: 'With Modi - Event 2' },
-  { src: `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/v1753677381/pic_Vth_VIP_fluo9c.jpg`, alt: 'With VIP' },
-  { src: `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/v1753677382/PIC_VTH_MODI_3_hgpsai.png`, alt: 'With Modi - Event 3' },
-]; 
+  { src: `https://res.cloudinary.com/dhzhuobu2/image/upload/v1753677381/PIC_VTH_MODI_dgwo9n.jpg`, alt: 'With Modi' },
+  { src: `https://res.cloudinary.com/dhzhuobu2/image/upload/v1753677381/pic_Vth_modi_1_libkxc.png`, alt: 'With Modi - Event 1' },
+  { src: `https://res.cloudinary.com/dhzhuobu2/image/upload/v1753677380/pic_vth_amit_bauivg.jpg`, alt: 'With Amit Shah' },
+  { src: `https://res.cloudinary.com/dhzhuobu2/image/upload/v1753677383/pic_Vth_Modi_2_zpiwe8.png`, alt: 'With Modi - Event 2' },
+  { src: `https://res.cloudinary.com/dhzhuobu2/image/upload/v1753677381/pic_Vth_VIP_fluo9c.jpg`, alt: 'With VIP' },
+  { src: `https://res.cloudinary.com/dhzhuobu2/image/upload/v1753677382/PIC_VTH_MODI_3_hgpsai.png`, alt: 'With Modi - Event 3' },
+];
 
 const fadeIn = {
   hidden: { opacity: 0, y: 40 },
@@ -82,7 +82,7 @@ const Hero = ({ currentLanguage }) => {
           {/* Background Image for Main Content Div */}
           <div className="absolute inset-0 z-0">
             <img
-              src={`https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/v1753677383/pic_Vth_Modi_2_zpiwe8.png`}
+              src={`https://res.cloudinary.com/dhzhuobu2/image/upload/v1753677383/pic_Vth_Modi_2_zpiwe8.png`}
               alt="Political Event Background"
               className="object-cover object-center w-full h-full opacity-60 md:opacity-100"
             />
@@ -164,7 +164,7 @@ const Hero = ({ currentLanguage }) => {
             custom={2}
           >
             <img
-              src={`https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/v1753677380/dorababumain_optimized_iejtzu.png`}
+              src={`https://res.cloudinary.com/dhzhuobu2/image/upload/v1753677380/dorababumain_optimized_iejtzu.png`}
               alt={currentLanguage === 'hi' ? 'वेंकट राममोहन राव (डोराबाबू)' : 'Venkata Ramamohan Rao (Dorababu)'}
               className="object-cover rounded-2xl md:rounded-3xl shadow-xl border-2 md:border-4 border-[#fdf6ec] w-36 h-36 sm:w-52 sm:h-52 md:w-72 md:h-72"
               style={{ maxWidth: '100%', maxHeight: '100%' }}
