@@ -209,11 +209,27 @@ export async function fetchMediaCategories() {
 
 // Journey API functions
 export async function fetchJourneyEvents() {
-  const response = await fetch(`${API_BASE_URL}/api/journey-events`);
-  if (!response.ok) {
-    throw new Error('Failed to fetch journey events');
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/journey-events`);
+    const contentType = response.headers.get('content-type');
+    
+    if (!contentType || !contentType.includes('application/json')) {
+      const text = await response.text();
+      console.error('Non-JSON response:', { status: response.status, statusText: response.statusText, text });
+      throw new Error(`Expected JSON but received ${contentType}`);
+    }
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      console.error('API Error:', { status: response.status, errorData });
+      throw new Error(errorData.message || 'Failed to fetch journey events');
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('fetchJourneyEvents error:', error);
+    throw error;
   }
-  return response.json();
 }
 
 export async function fetchJourneyEventsByCategory(category) {
