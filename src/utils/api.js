@@ -79,19 +79,61 @@ export async function fetchSpeechCategories() {
 
 // Gallery API functions
 export async function fetchGalleryPhotos() {
-  const response = await fetch(`${API_BASE_URL}/api/gallery`);
-  if (!response.ok) {
-    throw new Error('Failed to fetch gallery photos');
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/gallery`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    });
+    
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      const text = await response.text();
+      console.error('Non-JSON response:', text);
+      throw new Error(`Expected JSON but received ${contentType || 'unknown'}`);
+    }
+    
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.message || 'Failed to fetch gallery photos');
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('Error in fetchGalleryPhotos:', error);
+    throw error;
   }
-  return response.json();
 }
 
 export async function fetchGalleryPhotosByCategory(category) {
-  const response = await fetch(`${API_BASE_URL}/api/gallery/category/${category}`);
-  if (!response.ok) {
-    throw new Error('Failed to fetch gallery photos by category');
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/gallery/category/${category}`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    });
+    
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      const text = await response.text();
+      console.error('Non-JSON response for category:', category, text);
+      throw new Error(`Expected JSON but received ${contentType || 'unknown'}`);
+    }
+    
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.message || `Failed to fetch photos for category: ${category}`);
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('Error in fetchGalleryPhotosByCategory:', error);
+    throw error;
   }
-  return response.json();
 }
 
 export async function fetchFeaturedGalleryPhotos() {
