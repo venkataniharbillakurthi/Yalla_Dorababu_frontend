@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
 
   const validateToken = async () => {
     try {
-      const response = await fetch('https://52af2cbaec58.ngrok-free.app/api/admin/auth/validate', {
+      const response = await fetch('https://66b8fa4d6816.ngrok-free.app/api/admin/auth/validate', {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -66,8 +66,7 @@ export const AuthProvider = ({ children }) => {
       const response = await fetch('https://66b8fa4d6816.ngrok-free.app/api/admin/auth/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': 'true'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({ username, password })
       });
@@ -98,8 +97,7 @@ export const AuthProvider = ({ children }) => {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-            'ngrok-skip-browser-warning': 'true'
+            'Content-Type': 'application/json'
           }
         });
       }

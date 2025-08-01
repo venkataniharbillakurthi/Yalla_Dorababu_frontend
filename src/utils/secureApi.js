@@ -10,7 +10,6 @@ const secureApi = {
       ...options,
       headers: {
         'Content-Type': 'application/json',
-        'ngrok-skip-browser-warning': 'true',
         ...(token && { 'Authorization': `Bearer ${token}` }),
         ...options.headers
       }
@@ -68,4 +67,4 @@ const secureApi = {
   }
 };
 
-export default secureApi;
+export default secureApi; 

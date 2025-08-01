@@ -102,12 +102,9 @@ const Connect = ({ currentLanguage }) => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('https://66b8fa4d6816.ngrok-free.app/api/messages', {
+      const response = await fetch('/api/messages', {
         method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': 'true'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: formData.name,
           email: email,
