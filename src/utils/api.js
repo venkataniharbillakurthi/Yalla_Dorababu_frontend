@@ -1,7 +1,7 @@
 // API utility for backend communication
 // Uses fetch; can be swapped for axios if preferred
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://71d208229245.ngrok-free.app';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://da7313142708.ngrok-free.app';
 
 // Submit a new contact message
 export async function submitContactMessage({ name, email, message }) {
@@ -84,8 +84,7 @@ export async function fetchGalleryPhotos() {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      },
-      credentials: 'include'
+      }
     });
     
     const contentType = response.headers.get('content-type');
@@ -113,8 +112,7 @@ export async function fetchGalleryPhotosByCategory(category) {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      },
-      credentials: 'include'
+      }
     });
     
     const contentType = response.headers.get('content-type');
@@ -252,24 +250,36 @@ export async function fetchMediaCategories() {
 // Journey API functions
 export async function fetchJourneyEvents() {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/journey-events`);
-    const contentType = response.headers.get('content-type');
+    const response = await fetch(`${API_BASE_URL}/api/journey-events`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
     
+    const contentType = response.headers.get('content-type');
     if (!contentType || !contentType.includes('application/json')) {
       const text = await response.text();
-      console.error('Non-JSON response:', { status: response.status, statusText: response.statusText, text });
+      console.error('Non-JSON response for journey events:', { 
+        status: response.status, 
+        statusText: response.statusText, 
+        text 
+      });
       throw new Error(`Expected JSON but received ${contentType}`);
     }
     
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      console.error('API Error:', { status: response.status, errorData });
+      console.error('API Error in fetchJourneyEvents:', { 
+        status: response.status, 
+        errorData 
+      });
       throw new Error(errorData.message || 'Failed to fetch journey events');
     }
     
-    return await response.json();
+    return response.json();
   } catch (error) {
-    console.error('fetchJourneyEvents error:', error);
+    console.error('Error in fetchJourneyEvents:', error);
     throw error;
   }
 }
