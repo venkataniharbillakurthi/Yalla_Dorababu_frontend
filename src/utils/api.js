@@ -79,59 +79,19 @@ export async function fetchSpeechCategories() {
 
 // Gallery API functions
 export async function fetchGalleryPhotos() {
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/gallery`, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    });
-    
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      const text = await response.text();
-      console.error('Non-JSON response:', text);
-      throw new Error(`Expected JSON but received ${contentType || 'unknown'}`);
-    }
-    
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      throw new Error(error.message || 'Failed to fetch gallery photos');
-    }
-    
-    return response.json();
-  } catch (error) {
-    console.error('Error in fetchGalleryPhotos:', error);
-    throw error;
+  const response = await fetch(`${API_BASE_URL}/api/gallery`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch gallery photos');
   }
+  return response.json();
 }
 
 export async function fetchGalleryPhotosByCategory(category) {
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/gallery/category/${category}`, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    });
-    
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      const text = await response.text();
-      console.error('Non-JSON response for category:', category, text);
-      throw new Error(`Expected JSON but received ${contentType || 'unknown'}`);
-    }
-    
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      throw new Error(error.message || `Failed to fetch photos for category: ${category}`);
-    }
-    
-    return response.json();
-  } catch (error) {
-    console.error('Error in fetchGalleryPhotosByCategory:', error);
-    throw error;
+  const response = await fetch(`${API_BASE_URL}/api/gallery/category/${category}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch gallery photos by category');
   }
+  return response.json();
 }
 
 export async function fetchFeaturedGalleryPhotos() {
@@ -249,39 +209,11 @@ export async function fetchMediaCategories() {
 
 // Journey API functions
 export async function fetchJourneyEvents() {
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/journey-events`, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    });
-    
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      const text = await response.text();
-      console.error('Non-JSON response for journey events:', { 
-        status: response.status, 
-        statusText: response.statusText, 
-        text 
-      });
-      throw new Error(`Expected JSON but received ${contentType}`);
-    }
-    
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      console.error('API Error in fetchJourneyEvents:', { 
-        status: response.status, 
-        errorData 
-      });
-      throw new Error(errorData.message || 'Failed to fetch journey events');
-    }
-    
-    return response.json();
-  } catch (error) {
-    console.error('Error in fetchJourneyEvents:', error);
-    throw error;
+  const response = await fetch(`${API_BASE_URL}/api/journey-events`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch journey events');
   }
+  return response.json();
 }
 
 export async function fetchJourneyEventsByCategory(category) {
