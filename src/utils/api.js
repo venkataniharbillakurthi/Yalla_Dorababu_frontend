@@ -1,13 +1,19 @@
 // API utility for backend communication
 // Uses fetch; can be swapped for axios if preferred
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://52af2cbaec58.ngrok-free.app';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://66b8fa4d6816.ngrok-free.app';
+
+// Add header to bypass ngrok browser warning
+const headers = {
+  'Content-Type': 'application/json',
+  'ngrok-skip-browser-warning': 'true'
+};
 
 // Submit a new contact message
 export async function submitContactMessage({ name, email, message }) {
   const response = await fetch(`${API_BASE_URL}/api/messages`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify({ name, email, message }),
   });
   if (!response.ok) {
@@ -38,7 +44,9 @@ export async function deleteContactMessage(id) {
 
 // Speech API functions
 export async function fetchSpeeches() {
-  const response = await fetch(`${API_BASE_URL}/api/speeches`);
+  const response = await fetch(`${API_BASE_URL}/api/speeches`, {
+    headers
+  });
   if (!response.ok) {
     throw new Error('Failed to fetch speeches');
   }
@@ -46,7 +54,9 @@ export async function fetchSpeeches() {
 }
 
 export async function fetchSpeechesByCategory(category) {
-  const response = await fetch(`${API_BASE_URL}/api/speeches/category/${category}`);
+  const response = await fetch(`${API_BASE_URL}/api/speeches/category/${category}`, {
+    headers
+  });
   if (!response.ok) {
     throw new Error('Failed to fetch speeches by category');
   }
@@ -54,7 +64,9 @@ export async function fetchSpeechesByCategory(category) {
 }
 
 export async function searchSpeeches(query) {
-  const response = await fetch(`${API_BASE_URL}/api/speeches/search?q=${encodeURIComponent(query)}`);
+  const response = await fetch(`${API_BASE_URL}/api/speeches/search?q=${encodeURIComponent(query)}`, {
+    headers
+  });
   if (!response.ok) {
     throw new Error('Failed to search speeches');
   }
@@ -62,7 +74,9 @@ export async function searchSpeeches(query) {
 }
 
 export async function fetchSpeechById(id) {
-  const response = await fetch(`${API_BASE_URL}/api/speeches/${id}`);
+  const response = await fetch(`${API_BASE_URL}/api/speeches/${id}`, {
+    headers
+  });
   if (!response.ok) {
     throw new Error('Failed to fetch speech');
   }
@@ -103,7 +117,9 @@ export async function fetchFeaturedGalleryPhotos() {
 }
 
 export async function searchGalleryPhotos(query) {
-  const response = await fetch(`${API_BASE_URL}/api/gallery/search?q=${encodeURIComponent(query)}`);
+  const response = await fetch(`${API_BASE_URL}/api/gallery/search?q=${encodeURIComponent(query)}`, {
+    headers
+  });
   if (!response.ok) {
     throw new Error('Failed to search gallery photos');
   }
@@ -111,7 +127,9 @@ export async function searchGalleryPhotos(query) {
 }
 
 export async function fetchGalleryPhotoById(id) {
-  const response = await fetch(`${API_BASE_URL}/api/gallery/${id}`);
+  const response = await fetch(`${API_BASE_URL}/api/gallery/${id}`, {
+    headers
+  });
   if (!response.ok) {
     throw new Error('Failed to fetch gallery photo');
   }
@@ -152,7 +170,9 @@ export async function fetchMediaByCategory(category) {
 }
 
 export async function fetchFeaturedMedia() {
-  const response = await fetch(`${API_BASE_URL}/api/media/featured`);
+  const response = await fetch(`${API_BASE_URL}/api/media/featured`, {
+    headers
+  });
   if (!response.ok) {
     throw new Error('Failed to fetch featured media');
   }
@@ -160,7 +180,9 @@ export async function fetchFeaturedMedia() {
 }
 
 export async function fetchMediaWithVideo() {
-  const response = await fetch(`${API_BASE_URL}/api/media/video`);
+  const response = await fetch(`${API_BASE_URL}/api/media/video`, {
+    headers
+  });
   if (!response.ok) {
     throw new Error('Failed to fetch media with video');
   }
@@ -168,7 +190,9 @@ export async function fetchMediaWithVideo() {
 }
 
 export async function fetchMediaWithAudio() {
-  const response = await fetch(`${API_BASE_URL}/api/media/audio`);
+  const response = await fetch(`${API_BASE_URL}/api/media/audio`, {
+    headers
+  });
   if (!response.ok) {
     throw new Error('Failed to fetch media with audio');
   }
@@ -176,7 +200,9 @@ export async function fetchMediaWithAudio() {
 }
 
 export async function searchMedia(query) {
-  const response = await fetch(`${API_BASE_URL}/api/media/search?q=${encodeURIComponent(query)}`);
+  const response = await fetch(`${API_BASE_URL}/api/media/search?q=${encodeURIComponent(query)}`, {
+    headers
+  });
   if (!response.ok) {
     throw new Error('Failed to search media');
   }
@@ -233,7 +259,9 @@ export async function fetchJourneyEvents() {
 }
 
 export async function fetchJourneyEventsByCategory(category) {
-  const response = await fetch(`${API_BASE_URL}/api/journey-events/category/${category}`);
+  const response = await fetch(`${API_BASE_URL}/api/journey-events/category/${category}`, {
+    headers
+  });
   if (!response.ok) {
     throw new Error('Failed to fetch journey events by category');
   }
@@ -241,7 +269,9 @@ export async function fetchJourneyEventsByCategory(category) {
 }
 
 export async function fetchMilestoneEvents() {
-  const response = await fetch(`${API_BASE_URL}/api/journey-events/milestones`);
+  const response = await fetch(`${API_BASE_URL}/api/journey-events/milestones`, {
+    headers
+  });
   if (!response.ok) {
     throw new Error('Failed to fetch milestone events');
   }
@@ -249,7 +279,9 @@ export async function fetchMilestoneEvents() {
 }
 
 export async function fetchJourneyEventsByYear(year) {
-  const response = await fetch(`${API_BASE_URL}/api/journey-events/year/${year}`);
+  const response = await fetch(`${API_BASE_URL}/api/journey-events/year/${year}`, {
+    headers
+  });
   if (!response.ok) {
     throw new Error('Failed to fetch journey events by year');
   }
@@ -257,7 +289,9 @@ export async function fetchJourneyEventsByYear(year) {
 }
 
 export async function fetchJourneyEventsByYearRange(startYear, endYear) {
-  const response = await fetch(`${API_BASE_URL}/api/journey-events/year-range?startYear=${startYear}&endYear=${endYear}`);
+  const response = await fetch(`${API_BASE_URL}/api/journey-events/year-range?startYear=${startYear}&endYear=${endYear}`, {
+    headers
+  });
   if (!response.ok) {
     throw new Error('Failed to fetch journey events by year range');
   }
@@ -265,7 +299,9 @@ export async function fetchJourneyEventsByYearRange(startYear, endYear) {
 }
 
 export async function searchJourneyEvents(query) {
-  const response = await fetch(`${API_BASE_URL}/api/journey-events/search?q=${encodeURIComponent(query)}`);
+  const response = await fetch(`${API_BASE_URL}/api/journey-events/search?q=${encodeURIComponent(query)}`, {
+    headers
+  });
   if (!response.ok) {
     throw new Error('Failed to search journey events');
   }
@@ -273,7 +309,9 @@ export async function searchJourneyEvents(query) {
 }
 
 export async function fetchJourneyEventById(id) {
-  const response = await fetch(`${API_BASE_URL}/api/journey-events/${id}`);
+  const response = await fetch(`${API_BASE_URL}/api/journey-events/${id}`, {
+    headers
+  });
   if (!response.ok) {
     throw new Error('Failed to fetch journey event');
   }

@@ -63,10 +63,11 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      const response = await fetch('https://52af2cbaec58.ngrok-free.app/api/admin/auth/login', {
+      const response = await fetch('https://66b8fa4d6816.ngrok-free.app/api/admin/auth/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'true'
         },
         body: JSON.stringify({ username, password })
       });
@@ -93,11 +94,12 @@ export const AuthProvider = ({ children }) => {
   const logout = useCallback(async () => {
     try {
       if (token) {
-        await fetch('https://52af2cbaec58.ngrok-free.app/api/admin/auth/logout', {
+        await fetch('https://66b8fa4d6816.ngrok-free.app/api/admin/auth/logout', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': 'true'
           }
         });
       }

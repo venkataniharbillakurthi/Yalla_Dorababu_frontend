@@ -1,6 +1,6 @@
 // src/utils/secureApi.js
 
-const API_BASE_URL = 'https://52af2cbaec58.ngrok-free.app';
+const API_BASE_URL = 'https://66b8fa4d6816.ngrok-free.app';
 
 const secureApi = {
   async request(endpoint, options = {}) {
@@ -10,6 +10,7 @@ const secureApi = {
       ...options,
       headers: {
         'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
         ...(token && { 'Authorization': `Bearer ${token}` }),
         ...options.headers
       }
@@ -67,4 +68,4 @@ const secureApi = {
   }
 };
 
-export default secureApi; 
+export default secureApi;
