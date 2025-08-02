@@ -59,8 +59,19 @@ const Header = ({ currentLanguage, onLanguageChange }) => {
         <div className={`backdrop-blur-lg bg-white/70 rounded-xl shadow-lg p-3 border border-white/20 ${scrolled ? 'py-2' : 'py-3'}`}>
           <div className="flex justify-between items-center w-full">
             {/* Left: Logo + Name */}
-            <div className="flex flex-shrink-0 items-center space-x-3">
-              <img src="https://res.cloudinary.com/dhzhuobu2/image/upload/v1753677379/BJPFlag_fvzmdy.webp" alt="BJP Flag" className="w-auto h-10 rounded shadow" />
+            <div 
+              className="flex flex-shrink-0 items-center space-x-3 cursor-pointer hover:opacity-90 transition-opacity"
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setActiveLink('home');
+                setIsMenuOpen(false);
+              }}
+            >
+              <img 
+                src="https://res.cloudinary.com/dhzhuobu2/image/upload/v1753677379/BJPFlag_fvzmdy.webp" 
+                alt="BJP Flag" 
+                className="w-auto h-10 rounded shadow" 
+              />
               <span
                 className="text-3xl font-extrabold tracking-wide"
                 style={{
@@ -130,7 +141,8 @@ const Header = ({ currentLanguage, onLanguageChange }) => {
 
           {/* Mobile menu */}
           {isMenuOpen && (
-            <div className="overflow-hidden mt-4 rounded-lg shadow-lg backdrop-blur-md md:hidden bg-white/80">
+            <div className="fixed inset-0 z-40 mt-16 bg-white/95 backdrop-blur-sm md:hidden">
+              <div className="overflow-y-auto h-full py-4 px-4">
               <div className="px-2 pt-2 pb-4 space-y-2">
                 {navigation.map((item) => (
                   <a
@@ -173,7 +185,8 @@ const Header = ({ currentLanguage, onLanguageChange }) => {
                 </button>
               </div>
             </div>
-          )}
+          </div>
+        )}
 
         </div>
       </div>

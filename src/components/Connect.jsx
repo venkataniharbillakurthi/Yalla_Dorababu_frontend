@@ -103,18 +103,29 @@ const Connect = ({ currentLanguage }) => {
     setIsSubmitting(true);
     
     try {
-      const response = await submitContactMessage({
+      await submitContactMessage({
         name: formData.name,
         email: email,
         message: formData.message,
       });
-      if (response.ok) {
+      
+      // Clear form on successful submission
+      setFormData({ name: '', message: '' });
+      setEmail('');
       setSubmitSuccess(true);
-        setFormData({ name: '', message: '' });
-        setEmail('');
-      } else {
-        // handle error (optional: show error message)
-      }
+      
+      // Show success message
+      setToastMessage(currentLanguage === 'hi' 
+        ? 'संदेश सफलतापूर्वक भेजा गया!' 
+        : 'Message sent successfully!');
+      setShowToast(true);
+      
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setToastMessage(currentLanguage === 'hi' 
+        ? 'संदेश भेजने में त्रुटि हुई। कृपया पुनः प्रयास करें।' 
+        : 'Error sending message. Please try again.');
+      setShowToast(true);
     } finally {
       setIsSubmitting(false);
     }
