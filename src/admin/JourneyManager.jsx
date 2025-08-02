@@ -3,8 +3,8 @@ import secureApi from '../utils/secureApi';
 
 const empty = { year: '', titleEn: '', titleHi: '', descriptionEn: '', descriptionHi: '', image: '' };
 
-const CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'lorvens';
-const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dhzhuobu2';
+const CLOUDINARY_UPLOAD_PRESET = (import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'lorvens').trim();
+const CLOUDINARY_CLOUD_NAME = (import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dhzhuobu2').trim();
 
 const JourneyManager = () => {
   const [journey, setJourney] = useState([]);
