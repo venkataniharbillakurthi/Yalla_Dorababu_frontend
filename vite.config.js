@@ -7,7 +7,7 @@ export default defineConfig({
   base: process.env.VITE_BASE_PATH || "/Yalla_Dorababu",
   server: {
     proxy: {
-      '/api': 'https://incentive-warned-limited-wealth.trycloudflare.com',
+      '/api': 'https://dealt-binary-yu-extra.trycloudflare.com',
     },
   },
 });
