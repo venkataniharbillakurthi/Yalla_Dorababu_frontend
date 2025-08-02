@@ -1,18 +1,6 @@
-// Connect.jsx
 import React, { useState } from 'react';
-import {
-  Mail,
-  Twitter,
-  Facebook,
-  Instagram,
-  Youtube,
-  Send,
-  MessageSquare,
-  User,
-  MapPin
-} from 'lucide-react';
+import { Mail, Twitter, Facebook, Instagram, Youtube, Send, MessageSquare, User, Smartphone, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { submitContactMessage } from './api'; // adjust path if needed
 
 const Connect = ({ currentLanguage }) => {
   const [email, setEmail] = useState('');
@@ -79,10 +67,9 @@ const Connect = ({ currentLanguage }) => {
     {
       icon: <MapPin className="h-6 w-6 text-orange-500" />,
       title: currentLanguage === 'hi' ? 'पता' : 'Address',
-      value:
-        currentLanguage === 'hi'
-          ? 'डॉ. बी.आर. अंबेडकर कोनसीमा जिला'
-          : 'Dr. B.R. Ambedkar Konaseema District',
+      value: currentLanguage === 'hi' 
+        ? 'डॉ. बी.आर. अंबेडकर कोनसीमा जिला' 
+        : 'Dr. B.R. Ambedkar Konaseema District',
       link: 'https://maps.google.com/maps?q=Dr.+B.R.+Ambedkar+Konaseema+District'
     }
   ];
@@ -90,9 +77,12 @@ const Connect = ({ currentLanguage }) => {
   const handleSubscribe = (e) => {
     e.preventDefault();
     if (email) {
+      // In a real app, you would send this to your backend
       console.log('Subscribing email:', email);
       setIsSubscribed(true);
       setEmail('');
+      
+      // Reset subscription status after 5 seconds
       setTimeout(() => {
         setIsSubscribed(false);
       }, 5000);
@@ -101,7 +91,7 @@ const Connect = ({ currentLanguage }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
       [name]: value
     }));
@@ -110,38 +100,36 @@ const Connect = ({ currentLanguage }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitSuccess(false);
+    
     try {
-      await submitContactMessage({
-        name: formData.name,
-        email: email,
-        message: formData.message
+      const response = await fetch('/api/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: email,
+          message: formData.message,
+        }),
       });
+      if (response.ok) {
       setSubmitSuccess(true);
-      setFormData({ name: '', message: '' });
-      setEmail('');
-    } catch (err) {
-      console.error('Submit failed', err);
-      // optionally show error toast
-      setToastMessage(
-        currentLanguage === 'hi'
-          ? 'संदेश भेजने में त्रुटि हुई। कृपया बाद में पुनः प्रयास करें।'
-          : 'Failed to send message. Please try again later.'
-      );
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 3000);
+        setFormData({ name: '', message: '' });
+        setEmail('');
+      } else {
+        // handle error (optional: show error message)
+      }
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const showComingSoonToast = (platform) => {
-    setToastMessage(
-      currentLanguage === 'hi'
-        ? `${platform} जल्द ही आ रहा है!`
-        : `${platform} coming soon!`
-    );
+    setToastMessage(currentLanguage === 'hi' 
+      ? `${platform} जल्द ही आ रहा है!` 
+      : `${platform} coming soon!`);
     setShowToast(true);
+    
+    // Hide toast after 3 seconds
     setTimeout(() => {
       setShowToast(false);
     }, 3000);
@@ -155,6 +143,7 @@ const Connect = ({ currentLanguage }) => {
     }
   };
 
+  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -182,7 +171,7 @@ const Connect = ({ currentLanguage }) => {
   return (
     <section id="connect" className="py-16 bg-gradient-to-b from-gray-50 to-white scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
+        <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -200,7 +189,7 @@ const Connect = ({ currentLanguage }) => {
           </p>
         </motion.div>
 
-        <motion.div
+        <motion.div 
           className="grid grid-cols-1 lg:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
@@ -208,7 +197,7 @@ const Connect = ({ currentLanguage }) => {
           viewport={{ once: true }}
         >
           {/* Contact Form */}
-          <motion.div
+          <motion.div 
             className="lg:col-span-2 bg-white card-wow animate-fade-in rounded-xl shadow-wow overflow-hidden border-2 border-orange-100"
             variants={itemVariants}
           >
@@ -221,31 +210,27 @@ const Connect = ({ currentLanguage }) => {
                   {currentLanguage === 'hi' ? 'हमें संदेश भेजें' : 'Send Us a Message'}
                 </h3>
               </div>
-
+              
               <AnimatePresence>
                 {submitSuccess && (
-                  <motion.div
+                  <motion.div 
                     className="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-start"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
                   >
                     <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clipRule="evenodd"
-                      />
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
                     <span>
-                      {currentLanguage === 'hi'
-                        ? 'आपका संदेश सफलतापूर्वक भेज दिया गया है! हम जल्द ही आपसे संपर्क करेंगे।'
+                      {currentLanguage === 'hi' 
+                        ? 'आपका संदेश सफलतापूर्वक भेज दिया गया है! हम जल्द ही आपसे संपर्क करेंगे।' 
                         : 'Your message has been sent successfully! We will get back to you soon.'}
                     </span>
                   </motion.div>
                 )}
               </AnimatePresence>
-
+              
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-1">
@@ -268,7 +253,7 @@ const Connect = ({ currentLanguage }) => {
                       />
                     </div>
                   </div>
-
+                  
                   <div className="space-y-1">
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                       {currentLanguage === 'hi' ? 'ईमेल पता' : 'Email Address'}
@@ -290,7 +275,7 @@ const Connect = ({ currentLanguage }) => {
                     </div>
                   </div>
                 </div>
-
+                
                 <div className="space-y-1">
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700">
                     {currentLanguage === 'hi' ? 'आपका संदेश' : 'Your Message'}
@@ -306,7 +291,7 @@ const Connect = ({ currentLanguage }) => {
                     required
                   ></textarea>
                 </div>
-
+                
                 <div className="pt-2">
                   <motion.button
                     type="submit"
@@ -335,7 +320,7 @@ const Connect = ({ currentLanguage }) => {
                 </div>
               </form>
             </div>
-
+            
             {/* Contact Info */}
             <div className="bg-gray-50 p-6 border-t border-gray-200">
               <h4 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">
@@ -343,7 +328,13 @@ const Connect = ({ currentLanguage }) => {
               </h4>
               <div className="space-y-4">
                 {contactInfo.map((item, index) => (
-                  <a key={index} href={item.link} target="_blank" rel="noopener noreferrer" className="flex items-start group">
+                  <a 
+                    key={index} 
+                    href={item.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-start group"
+                  >
                     <span className="bg-white p-2 rounded-lg shadow-sm border border-gray-200 group-hover:bg-orange-50 group-hover:border-orange-200 transition-colors mr-4">
                       {item.icon}
                     </span>
@@ -364,7 +355,11 @@ const Connect = ({ currentLanguage }) => {
           {/* Social Media & Newsletter */}
           <motion.div className="space-y-6" variants={itemVariants}>
             {/* Social Media */}
-            <motion.div className="bg-white p-6 rounded-xl shadow-lg overflow-hidden" whileHover={{ y: -5 }} transition={{ type: 'spring', stiffness: 300 }}>
+            <motion.div 
+              className="bg-white p-6 rounded-xl shadow-lg overflow-hidden"
+              whileHover={{ y: -5 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
               <div className="flex items-center mb-6">
                 <div className="p-3 bg-blue-50 rounded-lg mr-4">
                   <svg className="h-6 w-6 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
@@ -375,7 +370,7 @@ const Connect = ({ currentLanguage }) => {
                   {currentLanguage === 'hi' ? 'सोशल मीडिया पर फॉलो करें' : 'Follow on Social Media'}
                 </h3>
               </div>
-
+              
               <div className="grid grid-cols-2 gap-4">
                 {socialLinks.map((social, index) => {
                   const Icon = social.icon;
@@ -409,7 +404,11 @@ const Connect = ({ currentLanguage }) => {
             </motion.div>
 
             {/* Newsletter */}
-            <motion.div className="bg-gradient-to-br from-orange-500 to-orange-600 p-6 rounded-xl shadow-lg overflow-hidden" whileHover={{ y: -5 }} transition={{ type: 'spring', stiffness: 300 }}>
+            <motion.div 
+              className="bg-gradient-to-br from-orange-500 to-orange-600 p-6 rounded-xl shadow-lg overflow-hidden"
+              whileHover={{ y: -5 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
               <div className="flex items-center mb-4">
                 <div className="p-2 bg-white/20 rounded-lg mr-3">
                   <Send className="h-5 w-5 text-white" />
@@ -418,16 +417,21 @@ const Connect = ({ currentLanguage }) => {
                   {currentLanguage === 'hi' ? 'न्यूज़लेटर सदस्यता' : 'Newsletter'}
                 </h3>
               </div>
-
+              
               <p className="text-orange-100 mb-6">
                 {currentLanguage === 'hi'
                   ? 'हमारे न्यूज़लेटर की सदस्यता लें और नवीनतम अपडेट प्राप्त करें'
                   : 'Subscribe to our newsletter and get the latest updates'}
               </p>
-
+              
               <AnimatePresence>
                 {isSubscribed ? (
-                  <motion.div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg border border-white/20" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                  <motion.div 
+                    className="bg-white/10 backdrop-blur-sm p-4 rounded-lg border border-white/20"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                  >
                     <div className="flex items-center">
                       <svg className="h-5 w-5 text-green-300 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -454,13 +458,16 @@ const Connect = ({ currentLanguage }) => {
                         required
                       />
                     </div>
-                    <button type="submit" className="w-full flex justify-center items-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-orange-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white focus:ring-offset-orange-500 transition-all">
+                    <button
+                      type="submit"
+                      className="w-full flex justify-center items-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-orange-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white focus:ring-offset-orange-500 transition-all"
+                    >
                       {currentLanguage === 'hi' ? 'सब्सक्राइब करें' : 'Subscribe Now'}
                     </button>
                   </form>
                 )}
               </AnimatePresence>
-
+              
               <p className="mt-4 text-xs text-orange-100 opacity-80 text-center">
                 {currentLanguage === 'hi'
                   ? 'हम आपकी गोपनीयता का सम्मान करते हैं। किसी भी समय सदस्यता समाप्त कर सकते हैं।'
@@ -484,11 +491,7 @@ const Connect = ({ currentLanguage }) => {
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <svg className="h-5 w-5 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                    clipRule="evenodd"
-                  />
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                 </svg>
               </div>
               <div className="ml-3">

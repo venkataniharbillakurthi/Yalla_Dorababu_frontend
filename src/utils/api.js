@@ -1,180 +1,283 @@
-// api.js
-// Central API utility with robust fetch wrapper and env-backed base URL
+// API utility for backend communication
+// Uses fetch; can be swapped for axios if preferred
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || (() => {
-  console.warn(
-    'VITE_API_URL not set; falling back to default tunnel. This may be incorrect in production.'
-  );
-  return 'https://incentive-warned-limited-wealth.trycloudflare.com';
-})();
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://incentive-warned-limited-wealth.trycloudflare.com';
 
-async function safeFetch(url, options = {}) {
-  const res = await fetch(url, options);
-  const contentType = res.headers.get('content-type') || '';
-  const text = await res.text();
-
-  if (!res.ok) {
-    console.error('API error', res.status, text);
-    throw new Error(`HTTP ${res.status}: ${text}`);
-  }
-
-  if (!contentType.includes('application/json')) {
-    console.warn('Expected JSON but got:', contentType, 'body:', text.slice(0, 200));
-    throw new Error('Invalid response format (not JSON)');
-  }
-
-  try {
-    return JSON.parse(text);
-  } catch (err) {
-    console.error('JSON parse failed:', text);
-    throw err;
-  }
-}
-
-// Message endpoints
+// Submit a new contact message
 export async function submitContactMessage({ name, email, message }) {
-  return safeFetch(`${API_BASE_URL}/api/messages`, {
+  const response = await fetch(`${API_BASE_URL}/api/messages`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, email, message }),
   });
+  if (!response.ok) {
+    throw new Error('Failed to submit message');
+  }
+  return response.json();
 }
 
+// Fetch all contact messages (admin)
 export async function fetchContactMessages() {
-  return safeFetch(`${API_BASE_URL}/api/messages`);
+  const response = await fetch(`${API_BASE_URL}/api/messages`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch messages');
+  }
+  return response.json();
 }
 
+// Delete a contact message by ID (admin)
 export async function deleteContactMessage(id) {
-  await safeFetch(`${API_BASE_URL}/api/messages/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/api/messages/${id}`, {
     method: 'DELETE',
   });
+  if (!response.ok) {
+    throw new Error('Failed to delete message');
+  }
   return true;
 }
 
-// Speeches
+// Speech API functions
 export async function fetchSpeeches() {
-  return safeFetch(`${API_BASE_URL}/api/speeches`);
+  const response = await fetch(`${API_BASE_URL}/api/speeches`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch speeches');
+  }
+  return response.json();
 }
 
 export async function fetchSpeechesByCategory(category) {
-  return safeFetch(`${API_BASE_URL}/api/speeches/category/${encodeURIComponent(category)}`);
+  const response = await fetch(`${API_BASE_URL}/api/speeches/category/${category}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch speeches by category');
+  }
+  return response.json();
 }
 
 export async function searchSpeeches(query) {
-  return safeFetch(`${API_BASE_URL}/api/speeches/search?q=${encodeURIComponent(query)}`);
+  const response = await fetch(`${API_BASE_URL}/api/speeches/search?q=${encodeURIComponent(query)}`);
+  if (!response.ok) {
+    throw new Error('Failed to search speeches');
+  }
+  return response.json();
 }
 
 export async function fetchSpeechById(id) {
-  return safeFetch(`${API_BASE_URL}/api/speeches/${id}`);
+  const response = await fetch(`${API_BASE_URL}/api/speeches/${id}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch speech');
+  }
+  return response.json();
 }
 
 export async function fetchSpeechCategories() {
-  return safeFetch(`${API_BASE_URL}/api/speeches/categories`);
+  const response = await fetch(`${API_BASE_URL}/api/speeches/categories`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch speech categories');
+  }
+  return response.json();
 }
 
-// Gallery
+// Gallery API functions
 export async function fetchGalleryPhotos() {
-  return safeFetch(`${API_BASE_URL}/api/gallery`);
+  const response = await fetch(`${API_BASE_URL}/api/gallery`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch gallery photos');
+  }
+  return response.json();
 }
 
 export async function fetchGalleryPhotosByCategory(category) {
-  return safeFetch(`${API_BASE_URL}/api/gallery/category/${encodeURIComponent(category)}`);
+  const response = await fetch(`${API_BASE_URL}/api/gallery/category/${category}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch gallery photos by category');
+  }
+  return response.json();
 }
 
 export async function fetchFeaturedGalleryPhotos() {
-  return safeFetch(`${API_BASE_URL}/api/gallery/featured`);
+  const response = await fetch(`${API_BASE_URL}/api/gallery/featured`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch featured gallery photos');
+  }
+  return response.json();
 }
 
 export async function searchGalleryPhotos(query) {
-  return safeFetch(`${API_BASE_URL}/api/gallery/search?q=${encodeURIComponent(query)}`);
+  const response = await fetch(`${API_BASE_URL}/api/gallery/search?q=${encodeURIComponent(query)}`);
+  if (!response.ok) {
+    throw new Error('Failed to search gallery photos');
+  }
+  return response.json();
 }
 
 export async function fetchGalleryPhotoById(id) {
-  return safeFetch(`${API_BASE_URL}/api/gallery/${id}`);
+  const response = await fetch(`${API_BASE_URL}/api/gallery/${id}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch gallery photo');
+  }
+  return response.json();
 }
 
 export async function fetchGalleryCategories() {
-  return safeFetch(`${API_BASE_URL}/api/gallery/categories`);
+  const response = await fetch(`${API_BASE_URL}/api/gallery/categories`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch gallery categories');
+  }
+  return response.json();
 }
 
-// Media
+// Media API functions
 export async function fetchMedia() {
-  return safeFetch(`${API_BASE_URL}/api/media`);
+  const response = await fetch(`${API_BASE_URL}/api/media`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch media');
+  }
+  return response.json();
 }
 
 export async function fetchMediaByType(type) {
-  return safeFetch(`${API_BASE_URL}/api/media/type/${encodeURIComponent(type)}`);
+  const response = await fetch(`${API_BASE_URL}/api/media/type/${type}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch media by type');
+  }
+  return response.json();
 }
 
 export async function fetchMediaByCategory(category) {
-  return safeFetch(`${API_BASE_URL}/api/media/category/${encodeURIComponent(category)}`);
+  const response = await fetch(`${API_BASE_URL}/api/media/category/${category}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch media by category');
+  }
+  return response.json();
 }
 
 export async function fetchFeaturedMedia() {
-  return safeFetch(`${API_BASE_URL}/api/media/featured`);
+  const response = await fetch(`${API_BASE_URL}/api/media/featured`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch featured media');
+  }
+  return response.json();
 }
 
 export async function fetchMediaWithVideo() {
-  return safeFetch(`${API_BASE_URL}/api/media/video`);
+  const response = await fetch(`${API_BASE_URL}/api/media/video`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch media with video');
+  }
+  return response.json();
 }
 
 export async function fetchMediaWithAudio() {
-  return safeFetch(`${API_BASE_URL}/api/media/audio`);
+  const response = await fetch(`${API_BASE_URL}/api/media/audio`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch media with audio');
+  }
+  return response.json();
 }
 
 export async function searchMedia(query) {
-  return safeFetch(`${API_BASE_URL}/api/media/search?q=${encodeURIComponent(query)}`);
+  const response = await fetch(`${API_BASE_URL}/api/media/search?q=${encodeURIComponent(query)}`);
+  if (!response.ok) {
+    throw new Error('Failed to search media');
+  }
+  return response.json();
 }
 
 export async function fetchMediaById(id) {
-  return safeFetch(`${API_BASE_URL}/api/media/${id}`);
+  const response = await fetch(`${API_BASE_URL}/api/media/${id}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch media');
+  }
+  return response.json();
 }
 
 export async function fetchMediaTypes() {
-  return safeFetch(`${API_BASE_URL}/api/media/types`);
+  const response = await fetch(`${API_BASE_URL}/api/media/types`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch media types');
+  }
+  return response.json();
 }
 
 export async function fetchMediaCategories() {
-  return safeFetch(`${API_BASE_URL}/api/media/categories`);
+  const response = await fetch(`${API_BASE_URL}/api/media/categories`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch media categories');
+  }
+  return response.json();
 }
 
-// Journey
+// Journey API functions
 export async function fetchJourneyEvents() {
-  return safeFetch(`${API_BASE_URL}/api/journey-events`);
+  const response = await fetch(`${API_BASE_URL}/api/journey-events`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch journey events');
+  }
+  return response.json();
 }
 
 export async function fetchJourneyEventsByCategory(category) {
-  return safeFetch(`${API_BASE_URL}/api/journey-events/category/${encodeURIComponent(category)}`);
+  const response = await fetch(`${API_BASE_URL}/api/journey-events/category/${category}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch journey events by category');
+  }
+  return response.json();
 }
 
 export async function fetchMilestoneEvents() {
-  return safeFetch(`${API_BASE_URL}/api/journey-events/milestones`);
+  const response = await fetch(`${API_BASE_URL}/api/journey-events/milestones`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch milestone events');
+  }
+  return response.json();
 }
 
 export async function fetchJourneyEventsByYear(year) {
-  return safeFetch(`${API_BASE_URL}/api/journey-events/year/${encodeURIComponent(year)}`);
+  const response = await fetch(`${API_BASE_URL}/api/journey-events/year/${year}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch journey events by year');
+  }
+  return response.json();
 }
 
 export async function fetchJourneyEventsByYearRange(startYear, endYear) {
-  return safeFetch(
-    `${API_BASE_URL}/api/journey-events/year-range?startYear=${encodeURIComponent(
-      startYear
-    )}&endYear=${encodeURIComponent(endYear)}`
-  );
+  const response = await fetch(`${API_BASE_URL}/api/journey-events/year-range?startYear=${startYear}&endYear=${endYear}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch journey events by year range');
+  }
+  return response.json();
 }
 
 export async function searchJourneyEvents(query) {
-  return safeFetch(`${API_BASE_URL}/api/journey-events/search?q=${encodeURIComponent(query)}`);
+  const response = await fetch(`${API_BASE_URL}/api/journey-events/search?q=${encodeURIComponent(query)}`);
+  if (!response.ok) {
+    throw new Error('Failed to search journey events');
+  }
+  return response.json();
 }
 
 export async function fetchJourneyEventById(id) {
-  return safeFetch(`${API_BASE_URL}/api/journey-events/${id}`);
+  const response = await fetch(`${API_BASE_URL}/api/journey-events/${id}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch journey event');
+  }
+  return response.json();
 }
 
 export async function fetchJourneyCategories() {
-  return safeFetch(`${API_BASE_URL}/api/journey-events/categories`);
+  const response = await fetch(`${API_BASE_URL}/api/journey-events/categories`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch journey categories');
+  }
+  return response.json();
 }
 
 export async function fetchJourneyYears() {
-  return safeFetch(`${API_BASE_URL}/api/journey-events/years`);
+  const response = await fetch(`${API_BASE_URL}/api/journey-events/years`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch journey years');
+  }
+  return response.json();
 }
+
+// Add more API functions as needed (e.g., fetchMediaById, fetchMediaByType, etc.)
