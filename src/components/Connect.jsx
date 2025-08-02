@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Twitter, Facebook, Instagram, Youtube, Send, MessageSquare, User, Smartphone, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { submitContactMessage } from '../utils/api';
 
 const Connect = ({ currentLanguage }) => {
   const [email, setEmail] = useState('');
@@ -102,14 +103,10 @@ const Connect = ({ currentLanguage }) => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('/api/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          email: email,
-          message: formData.message,
-        }),
+      const response = await submitContactMessage({
+        name: formData.name,
+        email: email,
+        message: formData.message,
       });
       if (response.ok) {
       setSubmitSuccess(true);
