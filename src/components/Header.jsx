@@ -141,8 +141,7 @@ const Header = ({ currentLanguage, onLanguageChange }) => {
 
           {/* Mobile menu */}
           {isMenuOpen && (
-            <div className="fixed inset-0 z-40 mt-16 bg-white/95 backdrop-blur-sm md:hidden">
-              <div className="overflow-y-auto h-full py-4 px-4">
+            <div className="overflow-hidden mt-4 rounded-lg shadow-lg backdrop-blur-md md:hidden bg-white/80">
               <div className="px-2 pt-2 pb-4 space-y-2">
                 {navigation.map((item) => (
                   <a
@@ -185,7 +184,6 @@ const Header = ({ currentLanguage, onLanguageChange }) => {
                 </button>
               </div>
             </div>
-          </div>
         )}
 
         </div>
