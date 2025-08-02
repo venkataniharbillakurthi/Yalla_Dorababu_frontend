@@ -73,7 +73,7 @@ const Header = ({ currentLanguage, onLanguageChange }) => {
                 className="w-auto h-10 rounded shadow" 
               />
               <span
-                className="text-3xl font-extrabold tracking-wide"
+                className="text-2xl font-extrabold tracking-wide"
                 style={{
                   color: '#F47216',
                   fontFamily: 'serif',

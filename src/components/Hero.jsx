@@ -142,7 +142,7 @@ const Hero = ({ currentLanguage }) => {
               variants={fadeIn}
             >
               <button 
-                className="px-6 py-2 text-base font-semibold text-white transition rounded-lg shadow sm:px-8 sm:py-3 bg-gradient-to-r from-orange-500 to-yellow-400 sm:text-lg hover:from-orange-600 hover:to-yellow-500"
+                className="px-6 py-2 text-base font-semibold text-white transition rounded-lg shadow sm:px-8 sm:py-3 bg-orange-500 sm:text-lg hover:bg-orange-500"
                 onClick={() => {
                   const aboutSection = document.querySelector('#about');
                   if (aboutSection) {
