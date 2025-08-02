@@ -70,10 +70,10 @@ const Header = ({ currentLanguage, onLanguageChange }) => {
               <img 
                 src="https://res.cloudinary.com/dhzhuobu2/image/upload/v1753677379/BJPFlag_fvzmdy.webp" 
                 alt="BJP Flag" 
-                className="w-auto h-10 rounded shadow" 
+                className="w-auto h-8 sm:h-10 rounded shadow" 
               />
               <span
-                className="text-2xl font-extrabold tracking-wide"
+                className="text-xl sm:text-2xl font-extrabold tracking-wide"
                 style={{
                   color: '#F47216',
                   fontFamily: 'serif',
