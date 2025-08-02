@@ -7,7 +7,7 @@ export default defineConfig({
   base: process.env.VITE_BASE_PATH || "/Yalla_Dorababu",
   server: {
     proxy: {
-      '/api': 'http://localhost:8080',
+      '/api': 'https://0d3d3f66cf63.ngrok-free.app',
     },
   },
 });
