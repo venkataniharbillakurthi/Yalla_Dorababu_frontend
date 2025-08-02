@@ -1,6 +1,6 @@
 // src/utils/secureApi.js
 
-const API_BASE_URL = 'https://dealt-binary-yu-extra.trycloudflare.com/api';
+const API_BASE_URL = 'https://explanation-bachelor-belkin-constraint.trycloudflare.com/api';
 
 const secureApi = {
   async request(endpoint, options = {}) {
