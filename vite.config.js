@@ -7,7 +7,7 @@ export default defineConfig({
   base: process.env.VITE_BASE_PATH || "/Yalla_Dorababu",
   server: {
     proxy: {
-      '/api': 'https://0d3d3f66cf63.ngrok-free.app',
+      '/api': 'https://incentive-warned-limited-wealth.trycloudflare.com',
     },
   },
 });
