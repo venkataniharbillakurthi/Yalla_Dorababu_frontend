@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
 
   const validateToken = async () => {
     try {
-      const response = await fetch('https://explanation-bachelor-belkin-constraint.trycloudflare.com/api/admin/auth/validate', {
+      const response = await fetch('https://must-selective-invention-haiti.trycloudflare.com/api/admin/auth/validate', {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      const response = await fetch('https://explanation-bachelor-belkin-constraint.trycloudflare.com/api/admin/auth/login', {
+      const response = await fetch('https://must-selective-invention-haiti.trycloudflare.com/api/admin/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -93,7 +93,7 @@ export const AuthProvider = ({ children }) => {
   const logout = useCallback(async () => {
     try {
       if (token) {
-        await fetch('https://explanation-bachelor-belkin-constraint.trycloudflare.com/api/admin/auth/logout', {
+        await fetch('https://must-selective-invention-haiti.trycloudflare.com/api/admin/auth/logout', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
