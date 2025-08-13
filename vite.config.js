@@ -7,7 +7,7 @@ export default defineConfig({
   base: process.env.VITE_BASE_PATH || "/Yalla_Dorababu",
   server: {
     proxy: {
-      '/api': 'https://must-selective-invention-haiti.trycloudflare.com',
+      '/api': 'https://ideas-reporting-growing-payment.trycloudflare.com',
     },
   },
 });

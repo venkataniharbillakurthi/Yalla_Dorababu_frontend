@@ -1,8 +1,7 @@
 // API utility for backend communication
 // Uses fetch; can be swapped for axios if preferred
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://must-selective-invention-haiti.trycloudflare.com';
-
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://ideas-reporting-growing-payment.trycloudflare.com';
 // Submit a new contact message
 export async function submitContactMessage({ name, email, message }) {
   const response = await fetch(`${API_BASE_URL}/api/messages`, {
