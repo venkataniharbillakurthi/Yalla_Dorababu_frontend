@@ -1,6 +1,6 @@
 // src/utils/secureApi.js
 
-const API_BASE_URL = 'https://ideas-reporting-growing-payment.trycloudflare.com/api';
+const API_BASE_URL = 'https://portfolio-backend-939r.onrender.com/api';
 
 const secureApi = {
   async request(endpoint, options = {}) {
