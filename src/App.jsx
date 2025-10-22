@@ -1,12 +1,12 @@
-import React, { useState, useContext, lazy, Suspense } from 'react';
+import React, { useState, useContext } from 'react';
 import Header from './components/Header';
 import './App.css';
-const DashboardLayout = React.lazy(() => import('./admin/DashboardLayout'));
-const JourneyManager = React.lazy(() => import('./admin/JourneyManager'));
-const SpeechesManager = React.lazy(() => import('./admin/SpeechesManager'));
-const PressReleaseManager = React.lazy(() => import('./admin/PressReleaseManager'));
-const GalleryManager = React.lazy(() => import('./admin/GalleryManager'));
-const MessagesManager = React.lazy(() => import('./admin/MessagesManager'));
+import DashboardLayout from './admin/DashboardLayout';
+import JourneyManager from './admin/JourneyManager';
+import SpeechesManager from './admin/SpeechesManager';
+import PressReleaseManager from './admin/PressReleaseManager';
+import GalleryManager from './admin/GalleryManager';
+import MessagesManager from './admin/MessagesManager';
   
 import Hero from './components/Hero';
 import About from './components/About';
@@ -103,25 +103,23 @@ function App() {
             />
           )}
           <main>
-            <Suspense fallback={<div>Loading...</div>}>
-              <Routes>
-                <Route path="/" element={<MainContent currentLanguage={currentLanguage} />} />
-                <Route path="/admin/login" element={<AdminLogin />} />
-                <Route path="/dashboard/*" element={
-                   <ProtectedRoute>
-                     <DashboardLayout />
-                   </ProtectedRoute>
-                 }>
-                   <Route path="journey" element={<JourneyManager />} />
-                   <Route path="speeches" element={<SpeechesManager />} />
-                   <Route path="press-release" element={<PressReleaseManager />} />
-                   <Route path="gallery" element={<GalleryManager />} />
-                   <Route path="messages" element={<MessagesManager />} />
-                 </Route>
+            <Routes>
+              <Route path="/" element={<MainContent currentLanguage={currentLanguage} />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/dashboard/*" element={
+                 <ProtectedRoute>
+                   <DashboardLayout />
+                 </ProtectedRoute>
+               }>
+                 <Route path="journey" element={<JourneyManager />} />
+                 <Route path="speeches" element={<SpeechesManager />} />
+                 <Route path="press-release" element={<PressReleaseManager />} />
+                 <Route path="gallery" element={<GalleryManager />} />
+                 <Route path="messages" element={<MessagesManager />} />
+               </Route>
 
-                 <Route path="*" element={<ErrorPage />} />
-              </Routes>
-            </Suspense>
+               <Route path="*" element={<ErrorPage />} />
+            </Routes>
           </main>
           <Footer currentLanguage={currentLanguage} />
         </div>
