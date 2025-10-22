@@ -121,10 +121,10 @@ const Gallery = ({ currentLanguage = 'en' }) => {
   return (
     <div className="w-full bg-[#FFF6ED] py-8">
       <div id="gallery" className="container mx-auto px-4 py-8 scroll-mt-24">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-center bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-300 text-transparent bg-clip-text drop-shadow-lg mb-8 animate-fade-in" style={{ lineHeight: '1.2', paddingBottom: '0.25em' }}>
+        <h2 className="text-4xl md:text-5xl font-bold font-serif mb-6 text-center" style={{ color: '#F47216' }}>
           {currentLanguage === 'hi' ? 'गैलरी' : 'Gallery'}
         </h2>
-        <div className="w-24 h-1 mx-auto rounded-full mb-8" style={{ background: '#F47216' }}></div>
+        <div className="w-32 h-1 mx-auto mb-6 rounded-full" style={{ background: '#F47216' }}></div>
         
         {/* Tabs */}
         <div className="flex justify-center mb-8">

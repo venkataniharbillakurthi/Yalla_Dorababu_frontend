@@ -186,10 +186,10 @@ const Connect = ({ currentLanguage }) => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold text-center bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-300 text-transparent bg-clip-text drop-shadow-lg mb-4 animate-fade-in">
-            {currentLanguage === 'hi' ? 'जुड़ें' : 'Connect'}
+          <h2 className="text-4xl md:text-5xl font-bold font-serif mb-6" style={{ color: '#F47216' }}>
+            {currentLanguage === 'hi' ? 'जुड़ना' : 'Connect'}
           </h2>
-          <div className="w-24 h-1.5 bg-gradient-to-r from-orange-500 to-orange-600 mx-auto rounded-full"></div>
+          <div className="w-32 h-1 mx-auto mb-6 rounded-full" style={{ background: '#F47216' }}></div>
           <p className="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">
             {currentLanguage === 'hi'
               ? 'हमसे जुड़े रहें और नवीनतम अपडेट प्राप्त करें'

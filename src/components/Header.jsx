@@ -9,7 +9,7 @@ const Header = ({ currentLanguage, onLanguageChange }) => {
 
   const navigation = [
     { name: 'Home', href: '#home', id: 'home', hindi: 'मुख्य पृष्ठ' },
-    { name: 'About', href: '#about', id: 'about', hindi: 'परिचय' },
+    { name: 'About', href: '#about', id: 'about', hindi: 'के बारे में' },
     { name: 'Timeline', href: '#timeline', id: 'timeline', hindi: 'समयरेखा' },
     { name: 'Speeches', href: '#speeches', id: 'speeches', hindi: 'भाषण' },
     { name: 'Press Release', href: '#press-release', id: 'press-release', hindi: 'प्रेस विज्ञप्ति' },

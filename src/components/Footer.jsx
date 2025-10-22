@@ -8,6 +8,7 @@ const Footer = ({ currentLanguage }) => {
   const quickLinks = [
     { name: currentLanguage === 'hi' ? 'मुख्य पृष्ठ' : 'Home', href: '#home' },
     { name: currentLanguage === 'hi' ? 'परिचय' : 'About', href: '#about' },
+    { name: currentLanguage === 'hi' ? 'कार्यकाल' : 'Timeline', href: '#timeline' },
     { name: currentLanguage === 'hi' ? 'भाषण' : 'Speeches', href: '#speeches' },
     { name: currentLanguage === 'hi' ? 'प्रेस विज्ञप्ति' : 'Press Release', href: '#press-release' },
     { name: currentLanguage === 'hi' ? 'गैलरी' : 'Gallery', href: '#gallery' }
@@ -15,13 +16,13 @@ const Footer = ({ currentLanguage }) => {
 
   const contactInfo = [
     {
-      icon: <Mail className="h-5 w-5 text-orange-500" />,
+      icon: <Mail className="h-5 w-5 text-white" />,
       text: 'Satyayalla1998@gmail.com',
       link: 'mailto:Satyayalla1998@gmail.com',
       label: currentLanguage === 'hi' ? 'ईमेल' : 'Email'
     },
     {
-      icon: <MapPin className="h-5 w-5 text-orange-500" />,
+      icon: <MapPin className="h-5 w-5 text-white" />,
       text: currentLanguage === 'hi' 
         ? 'डॉ. बी.आर. अंबेडकर कोनसीमा जिला' 
         : 'Dr. B.R. Ambedkar Konaseema District',
@@ -75,7 +76,7 @@ const Footer = ({ currentLanguage }) => {
   };
 
   return (
-    <footer className="bg-gradient-to-b from-accent via-accent-light to-navy text-white pt-16 pb-8 border-t-4 border-accent shadow-wow animate-fade-in">
+    <footer className="bg-orange-500 text-white pt-6 pb-6 border-t-4 border-orange-600 shadow-wow animate-fade-in">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12"
@@ -137,7 +138,7 @@ const Footer = ({ currentLanguage }) => {
 
           {/* Center: Quick Links */}
           <motion.div variants={itemVariants} className="flex flex-col items-start">
-            <h4 className="text-lg font-semibold text-white mb-4 pb-2 border-b-2 border-orange-600 inline-block">
+            <h4 className="text-lg font-semibold text-white mb-4 pb-2 border-b-2 border-white inline-block">
               {currentLanguage === 'hi' ? 'त्वरित लिंक' : 'Quick Links'}
             </h4>
             <ul className="space-y-2">
@@ -161,7 +162,7 @@ const Footer = ({ currentLanguage }) => {
 
           {/* Right: Contact Info */}
           <motion.div variants={itemVariants} className="flex flex-col items-start">
-            <h4 className="text-lg font-semibold text-white mb-4 pb-2 border-b-2 border-orange-600 inline-block">
+            <h4 className="text-lg font-semibold text-white mb-4 pb-2 border-b-2 border-white inline-block">
               {currentLanguage === 'hi' ? 'संपर्क जानकारी' : 'Contact Information'}
             </h4>
             <ul className="space-y-3">
@@ -203,7 +204,7 @@ const Footer = ({ currentLanguage }) => {
           transition={{ delay: 0.2 }}
         >
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-500 text-sm mb-4 md:mb-0">
+            <p className="text-white text-sm mb-4 md:mb-0">
               &copy; {currentYear} {currentLanguage === 'hi' ? 'यल्ला डोराबाबू। सर्वाधिकार सुरक्षित।' : 'Yalla Dorababu. All rights reserved.'}
             </p>
           </div>

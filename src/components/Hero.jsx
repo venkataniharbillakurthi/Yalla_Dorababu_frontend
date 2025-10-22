@@ -150,7 +150,7 @@ const Hero = ({ currentLanguage }) => {
                   }
                 }}
               >
-                {currentLanguage === 'hi' ? 'और जानें' : 'Learn More'}
+                {currentLanguage === 'hi' ? 'अधिक जानें' : 'Learn More'}
               </button>
             </motion.div>
           </motion.div>
@@ -175,7 +175,7 @@ const Hero = ({ currentLanguage }) => {
       {/* Carousel Section */}
       <div className="mt-2 sm:mt-4">
         <h2 className="mb-4 font-serif text-lg font-bold tracking-tight text-center text-orange-700 sm:text-2xl md:text-3xl sm:mb-8">
-          {currentLanguage === 'hi' ? 'सामाजिक सेवा, राजनीति और विकास के लिए एक बीजीपी लीडर।' : 'Moments in Public Life'}
+          {currentLanguage === 'hi' ? 'सार्वजनिक जीवन के क्षण ' : 'Moments in Public Life'}
         </h2>
         <div 
           className="w-full overflow-x-auto cursor-grab active:cursor-grabbing scrollbar-hide"

@@ -55,12 +55,12 @@ const About = ({ currentLanguage }) => {
     },
     {
       icon: <Heart className="w-5 h-5" />,
-      text: currentLanguage === 'hi' ? 'हजारों लोगों से जुड़ाव' : 'Thousands Impacted',
+      text: currentLanguage === 'hi' ? 'हजारों लोगों को प्रभावित किया ' : 'Thousands Impacted',
       color: 'text-orange-700'
     },
     {
       icon: <Shield className="w-5 h-5" />,
-      text: currentLanguage === 'hi' ? 'भरोसेमंद नेतृत्व' : 'Trusted Leadership',
+      text: currentLanguage === 'hi' ? 'विश्वसनीय नेतृत्व ' : 'Trusted Leadership',
       color: 'text-yellow-600'
     }
   ];
@@ -104,7 +104,7 @@ const About = ({ currentLanguage }) => {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-5xl md:text-6xl font-bold mb-6 font-serif" style={{ color: '#F47216' }}>
-            {currentLanguage === 'hi' ? 'विषय में' : 'About'}
+            {currentLanguage === 'hi' ? 'के बारे में' : 'About'}
           </h2>
           <div className="w-32 h-1.5 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 mx-auto rounded-full shadow-lg"></div>
         </motion.div>
