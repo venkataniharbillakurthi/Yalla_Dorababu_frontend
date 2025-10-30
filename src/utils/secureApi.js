@@ -1,6 +1,6 @@
 // src/utils/secureApi.js
 
-const API_BASE_URL = 'http://88.222.213.145:8080/api';
+const API_BASE_URL = 'https://yalladorababu.in:8080/api';
 
 const secureApi = {
   async request(endpoint, options = {}) {
