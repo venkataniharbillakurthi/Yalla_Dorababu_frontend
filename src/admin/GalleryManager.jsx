@@ -97,7 +97,7 @@ const GalleryManager = () => {
   const fetchItems = async () => {
     setIsLoading(true);
     try {
-      const response = await secureApi.get('/gallery');
+      const response = await secureApi.get('/api/gallery');
       if (response.ok) {
         const data = await response.json();
         setItems(data);
@@ -128,14 +128,14 @@ const GalleryManager = () => {
     try {
       let itemData = { ...draft, type: activeTab === 'videos' ? 'video' : 'photo' };
       if (editingId) {
-        await secureApi.put(`/gallery/${editingId}`, itemData);
+        await secureApi.put(`/api/gallery/${editingId}`, itemData);
       } else {
         // Assign sortOrder as the next highest for the current type
         const maxSortOrder = items
           .filter(item => item.type === itemData.type)
           .reduce((max, item) => Math.max(max, item.sortOrder || 0), 0);
         itemData = { ...itemData, sortOrder: maxSortOrder + 1 };
-        await secureApi.post('/gallery', itemData);
+        await secureApi.post('/api/gallery', itemData);
       }
       fetchItems();
       reset();
@@ -148,7 +148,7 @@ const GalleryManager = () => {
     if (window.confirm('Are you sure you want to delete this item?')) {
       setIsLoading(true);
       try {
-        await secureApi.delete(`/gallery/${id}`);
+        await secureApi.delete(`/api/gallery/${id}`);
         fetchItems();
       } finally {
         setIsLoading(false);
@@ -182,7 +182,7 @@ const GalleryManager = () => {
     });
 
     // Call backend to persist
-    fetch('/api/gallery/reorder', {
+    fetch('https://yalladorababu.in/api/api/gallery/reorder', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedItems.map(({ id, sortOrder }) => ({ id, sortOrder }))),

@@ -16,7 +16,7 @@ const JourneyManager = () => {
   const fetchJourney = async () => {
     setIsLoading(true);
     try {
-      const response = await secureApi.get('/journey-events');
+      const response = await secureApi.get('/api/journey-events');
       if (response.ok) {
         let data = await response.json();
         // Sort so newest (by id) is last
@@ -46,9 +46,9 @@ const JourneyManager = () => {
     setIsLoading(true);
     try {
       if (editingId) {
-        await secureApi.put(`/journey-events/${editingId}`, draft);
+        await secureApi.put(`/api/journey-events/${editingId}`, draft);
       } else {
-        await secureApi.post('/journey-events', draft);
+        await secureApi.post('/api/journey-events', draft);
       }
       fetchJourney();
       reset();
@@ -61,7 +61,7 @@ const JourneyManager = () => {
     if (window.confirm('Are you sure you want to delete this item?')) {
       setIsLoading(true);
       try {
-        await secureApi.delete(`/journey-events/${id}`);
+        await secureApi.delete(`/api/journey-events/${id}`);
         fetchJourney();
       } finally {
         setIsLoading(false);

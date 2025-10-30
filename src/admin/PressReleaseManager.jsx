@@ -25,7 +25,7 @@ const PressReleaseManager = () => {
   const fetchMedia = async () => {
     setIsLoading(true);
     try {
-      const response = await secureApi.get('/media');
+      const response = await secureApi.get('/api/media');
       if (response.ok) {
         const data = await response.json();
         setMedia(data);
@@ -56,9 +56,9 @@ const PressReleaseManager = () => {
     try {
       const itemData = { ...draft };
       if (editingId) {
-        await secureApi.put(`/media/${editingId}`, itemData);
+        await secureApi.put(`/api/media/${editingId}`, itemData);
       } else {
-        await secureApi.post('/media', itemData);
+        await secureApi.post('/api/media', itemData);
       }
       fetchMedia();
       reset();
@@ -71,7 +71,7 @@ const PressReleaseManager = () => {
     if (window.confirm('Are you sure you want to delete this item?')) {
       setIsLoading(true);
       try {
-        await secureApi.delete(`/media/${id}`);
+        await secureApi.delete(`/api/media/${id}`);
         fetchMedia();
       } finally {
         setIsLoading(false);
