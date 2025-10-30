@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow common non-routed folders (none for SPA by default)
+
+Sitemap: https://yalladorababu.in/sitemap.xml
+
+
