@@ -1,6 +1,6 @@
 // src/utils/secureApi.js
 
-const API_BASE_URL = '/api';
+const API_BASE_URL = 'https://yalladorababu.in/api';
 
 const secureApi = {
   async request(endpoint, options = {}) {
