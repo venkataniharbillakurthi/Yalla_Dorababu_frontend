@@ -38,7 +38,7 @@ export async function deleteContactMessage(id) {
 
 // Speech API functions
 export async function fetchSpeeches() {
-  const response = await fetch(`${API_BASE_URL}/api/speeches`);
+  const response = await fetch(`${API_BASE_URL}/speeches`);
   if (!response.ok) {
     throw new Error('Failed to fetch speeches');
   }
@@ -46,7 +46,7 @@ export async function fetchSpeeches() {
 }
 
 export async function fetchSpeechesByCategory(category) {
-  const response = await fetch(`${API_BASE_URL}/api/speeches/category/${category}`);
+  const response = await fetch(`${API_BASE_URL}/speeches/category/${category}`);
   if (!response.ok) {
     throw new Error('Failed to fetch speeches by category');
   }
@@ -54,7 +54,7 @@ export async function fetchSpeechesByCategory(category) {
 }
 
 export async function searchSpeeches(query) {
-  const response = await fetch(`${API_BASE_URL}/api/speeches/search?q=${encodeURIComponent(query)}`);
+  const response = await fetch(`${API_BASE_URL}/speeches/search?q=${encodeURIComponent(query)}`);
   if (!response.ok) {
     throw new Error('Failed to search speeches');
   }
@@ -62,7 +62,7 @@ export async function searchSpeeches(query) {
 }
 
 export async function fetchSpeechById(id) {
-  const response = await fetch(`${API_BASE_URL}/api/speeches/${id}`);
+  const response = await fetch(`${API_BASE_URL}/speeches/${id}`);
   if (!response.ok) {
     throw new Error('Failed to fetch speech');
   }
@@ -70,7 +70,7 @@ export async function fetchSpeechById(id) {
 }
 
 export async function fetchSpeechCategories() {
-  const response = await fetch(`${API_BASE_URL}/api/speeches/categories`);
+  const response = await fetch(`${API_BASE_URL}/speeches/categories`);
   if (!response.ok) {
     throw new Error('Failed to fetch speech categories');
   }
