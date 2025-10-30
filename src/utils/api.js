@@ -1,7 +1,7 @@
 // API utility for backend communication
 // Uses fetch; can be swapped for axios if preferred
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://88.222.213.145:8080';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://yalladorababu.in:8080';
 
 // Submit a new contact message
 export async function submitContactMessage({ name, email, message }) {
