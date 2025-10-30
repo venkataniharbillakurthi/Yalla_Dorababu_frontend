@@ -27,7 +27,7 @@ const SpeechesManager = () => {
   const fetchSpeeches = async () => {
     setIsLoading(true);
     try {
-      const response = await secureApi.get('/speeches');
+      const response = await secureApi.get('/api/speeches');
       if (response.ok) {
         let data = await response.json();
         // Sort so newest (by id) is last
@@ -75,9 +75,9 @@ const SpeechesManager = () => {
         duration: draft.duration
       };
       if (editingId) {
-        await secureApi.put(`/speeches/${editingId}`, payload);
+        await secureApi.put(`/api/speeches/${editingId}`, payload);
       } else {
-        await secureApi.post('/speeches', payload);
+        await secureApi.post('/api/speeches', payload);
       }
       fetchSpeeches();
       reset();
@@ -89,7 +89,7 @@ const SpeechesManager = () => {
     if (window.confirm('Are you sure you want to delete this item?')) {
       setIsLoading(true);
       try {
-        await secureApi.delete(`/speeches/${id}`);
+        await secureApi.delete(`/api/speeches/${id}`);
         fetchSpeeches();
       } finally {
         setIsLoading(false);
