@@ -39,12 +39,12 @@ const Connect = ({ currentLanguage }) => {
     {
       name: 'Instagram',
       icon: Instagram,
-      url: '#',
+      url: 'https://www.instagram.com/yalladorababu.official/?hl=en',
       color: 'from-pink-500 to-pink-600',
       bg: 'bg-pink-500',
       followers: currentLanguage === 'hi' ? '85 लाख' : '8.5M',
       label: currentLanguage === 'hi' ? 'फॉलोअर्स' : 'Followers',
-      comingSoon: true
+      comingSoon: false
     },
     {
       name: 'YouTube',
